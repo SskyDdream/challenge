@@ -1,0 +1,32 @@
+{% macro render_form(form, url) %}
+<form method="POST" action="{{ url }}">
+
+   {{ form.csrf_token }}
+
+   {% for field in form %}
+       {% if field.type == 'CSRFTokenField' %}
+       {{ '' }}
+
+       {% elif field.type == 'SubmitField' %}
+        {{ form.submit(class='btn btn-primary') }}
+
+       {% elif field.type == 'BooleanField' %}
+       <div class="checkbox">
+        <label>
+            {{ field() }} {{ field.label.text }}
+        </label>
+       </div>
+       {% else %}
+       <!-- 当 errors 不为空，添加 has-error 类，这样输入框就变成红色了-->
+       <div class="form-group {% if field.errors %}has-error{% endif %}">
+           {{ field.label }} {{ field(class="form-control") }}
+       {% if field.errors %}
+           {% for error in field.errors %}
+            <span class="help-block">{{ error }}</span>
+           {% endfor %}
+       {% endif %}
+       </div>
+       {% endif %}
+   {% endfor %}
+</form>
+{% endmacro %}

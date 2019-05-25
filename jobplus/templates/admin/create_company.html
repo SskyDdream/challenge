@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'admin/index.html' %}
+{% from 'macros.html' import render_form %}
 
-</body>
-</html>
+{% block admin %}
+    <h4>创建企业用户</h4>
+    {{ render_form(form, url_for('admin.create_company')) }}
+{% endblock %}

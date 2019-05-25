@@ -2,6 +2,8 @@ class BaseConfig(object):
     """配置基类"""
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'very secret key'
+    INDEX_PER_PAGE = 12
+    ADMIN_PER_PAGE = 15
 
 
 class DevelopmentConfig(BaseConfig):
